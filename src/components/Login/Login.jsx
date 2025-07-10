@@ -2,14 +2,23 @@ import { motion } from "framer-motion";
 import { Dumbbell, Lock, Mail, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { InputBox } from "./InputBox";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Login = () => {
+  const [loginFormData, setLoginFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
+
+  const handleLoginBtn = () => {
+    console.log(loginFormData);
+  };
 
   return (
     <section className="min-h-screen bg-black font-head py-6 px-4 flex flex-col items-center justify-start">
@@ -48,6 +57,8 @@ export const Login = () => {
           Iconname={Mail}
           labelName="Email"
           inputId="email"
+          formData={loginFormData}
+          setFormData={setLoginFormData}
         />
         <InputBox
           placeholder="Enter your password"
@@ -55,25 +66,20 @@ export const Login = () => {
           Iconname={Lock}
           labelName="Password"
           inputId="password"
+          formData={loginFormData}
+          setFormData={setLoginFormData}
         />
 
-        <div className="flex items-start space-x-2 mt-1">
-          <input
-            type="checkbox"
-            name="termsAndCondition"
-            id="termsAndCondition"
-            className="mt-1"
-          />
-          <label
-            htmlFor="termsAndCondition"
-            className="text-sm text-gray-300"
-          >
-            Remember me
-          </label>
-        </div>
-
-        <button className="w-full rounded-xl p-3 bg-red-500 hover:bg-red-600 text-white transition duration-300">
-          Create Account
+        <button
+          onClick={handleLoginBtn}
+          disabled={!loginFormData.email || !loginFormData.password}
+          className={`w-full rounded-xl p-3 text-white transition duration-300 ${
+            loginFormData.email && loginFormData.password
+              ? "bg-red-500 hover:bg-red-600 cursor-pointer"
+              : "bg-red-400 cursor-not-allowed"
+          }`}
+        >
+          Log in
         </button>
 
         <p className="text-md text-gray-300 text-center">

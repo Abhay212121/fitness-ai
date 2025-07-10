@@ -2,14 +2,40 @@ import { motion } from "framer-motion";
 import { Dumbbell, Lock, Mail, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { InputBox } from "./InputBox";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const Signup = () => {
+  const [signupFormData, setSignupFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
+
+  const [isMatch, setMatch] = useState(false);
+  const [termsCheck, setTermsCheck] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, []);
+
+  useEffect(() => {
+    if (
+      signupFormData.password == signupFormData.cpassword &&
+      signupFormData.cpassword &&
+      signupFormData.password
+    ) {
+      setMatch(true);
+    } else {
+      setMatch(false);
+    }
+  }, [signupFormData.password, signupFormData.cpassword]);
+
+  const handeCreateBtn = () => {
+    console.log(signupFormData);
+  };
 
   return (
     <section className="min-h-screen bg-black font-head py-6 px-4 flex flex-col items-center justify-start">
@@ -48,6 +74,8 @@ export const Signup = () => {
           Iconname={User}
           labelName="Full Name"
           inputId="fullName"
+          formData={signupFormData}
+          setFormData={setSignupFormData}
         />
         <InputBox
           placeholder="Enter your email"
@@ -55,6 +83,8 @@ export const Signup = () => {
           Iconname={Mail}
           labelName="Email"
           inputId="email"
+          formData={signupFormData}
+          setFormData={setSignupFormData}
         />
         <InputBox
           placeholder="Enter your password"
@@ -62,6 +92,8 @@ export const Signup = () => {
           Iconname={Lock}
           labelName="Password"
           inputId="password"
+          formData={signupFormData}
+          setFormData={setSignupFormData}
         />
         <InputBox
           placeholder="Confirm your password"
@@ -69,11 +101,14 @@ export const Signup = () => {
           Iconname={Lock}
           labelName="Confirm Password"
           inputId="cpassword"
+          formData={signupFormData}
+          setFormData={setSignupFormData}
         />
 
         <div className="flex items-start space-x-2 mt-1">
           <input
             type="checkbox"
+            onClick={() => setTermsCheck(!termsCheck)}
             name="termsAndCondition"
             id="termsAndCondition"
             className="mt-1"
@@ -91,7 +126,15 @@ export const Signup = () => {
           </label>
         </div>
 
-        <button className="w-full rounded-xl p-3 bg-red-500 hover:bg-red-600 text-white transition duration-300">
+        <button
+          disabled={!termsCheck || !isMatch || !signupFormData.cpassword}
+          onClick={handeCreateBtn}
+          className={`w-full rounded-xl p-3 text-white transition duration-300 ${
+            termsCheck && isMatch && signupFormData.cpassword
+              ? "bg-red-500 hover:bg-red-600 cursor-pointer"
+              : "bg-red-400 cursor-not-allowed"
+          }`}
+        >
           Create Account
         </button>
 
