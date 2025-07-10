@@ -3,6 +3,8 @@ import { Dumbbell, Lock, Mail, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { InputBox } from "./InputBox";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { baseUrl } from "../../../constants/constant";
 
 export const Signup = () => {
   const [signupFormData, setSignupFormData] = useState({
@@ -14,6 +16,7 @@ export const Signup = () => {
 
   const [isMatch, setMatch] = useState(false);
   const [termsCheck, setTermsCheck] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -33,8 +36,25 @@ export const Signup = () => {
     }
   }, [signupFormData.password, signupFormData.cpassword]);
 
-  const handeCreateBtn = () => {
-    console.log(signupFormData);
+  const handeCreateBtn = async () => {
+    setLoading(true);
+    const { cpassword, ...rest } = signupFormData;
+    const data = rest;
+    console.log(data);
+    try {
+      const res = await axios.post(`${baseUrl}user/register`, {
+        data,
+      });
+      if (res.data.status == 201) {
+        console.log("User registered Successfully!");
+      } else {
+        console.log("Error in registering user!");
+      }
+    } catch (error) {
+      console.log("Err:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -127,7 +147,9 @@ export const Signup = () => {
         </div>
 
         <button
-          disabled={!termsCheck || !isMatch || !signupFormData.cpassword}
+          disabled={
+            !termsCheck || !isMatch || !signupFormData.cpassword || loading
+          }
           onClick={handeCreateBtn}
           className={`w-full rounded-xl p-3 text-white transition duration-300 ${
             termsCheck && isMatch && signupFormData.cpassword
