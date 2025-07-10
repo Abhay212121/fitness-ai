@@ -1,0 +1,91 @@
+import { motion } from "framer-motion";
+import { Dumbbell, Lock, Mail, User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { InputBox } from "./InputBox";
+import { useEffect } from "react";
+
+export const Login = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
+  return (
+    <section className="min-h-screen bg-black font-head py-6 px-4 flex flex-col items-center justify-start">
+      <motion.div
+        initial={{ opacity: 0, y: 80 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="flex flex-col items-center gap-3 text-center"
+      >
+        <div
+          onClick={() => navigate("/")}
+          className="flex justify-center space-x-2 mb-2 cursor-pointer"
+        >
+          <Dumbbell className="h-8 w-8 text-red-500" />
+          <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
+            FitTrack
+          </span>
+        </div>
+        <p className="text-white font-bold text-3xl">Welcome Back</p>
+        <p className="text-gray-400 tracking-wide text-lg">
+          Sign in to continue your fitness journey
+        </p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.4 }}
+        className="w-full max-w-md bg-[#111827] flex flex-col space-y-5 text-white px-6 py-6 rounded-xl mt-8"
+      >
+        <p className="text-2xl font-semibold text-center">Sign In</p>
+
+        <InputBox
+          placeholder="Enter your email"
+          inputType="email"
+          Iconname={Mail}
+          labelName="Email"
+          inputId="email"
+        />
+        <InputBox
+          placeholder="Enter your password"
+          inputType="password"
+          Iconname={Lock}
+          labelName="Password"
+          inputId="password"
+        />
+
+        <div className="flex items-start space-x-2 mt-1">
+          <input
+            type="checkbox"
+            name="termsAndCondition"
+            id="termsAndCondition"
+            className="mt-1"
+          />
+          <label
+            htmlFor="termsAndCondition"
+            className="text-sm text-gray-300"
+          >
+            Remember me
+          </label>
+        </div>
+
+        <button className="w-full rounded-xl p-3 bg-red-500 hover:bg-red-600 text-white transition duration-300">
+          Create Account
+        </button>
+
+        <p className="text-md text-gray-300 text-center">
+          Don't have an Account?{" "}
+          <span
+            onClick={() => navigate("/register")}
+            className="font-semibold text-red-400 hover:underline cursor-pointer"
+          >
+            Register
+          </span>
+        </p>
+      </motion.div>
+    </section>
+  );
+};

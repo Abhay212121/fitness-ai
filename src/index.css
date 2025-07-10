@@ -98,6 +98,13 @@
   background: #ef4444;
 }
 
+input:-webkit-autofill {
+  background-color: #1f2937 !important; /* match your Tailwind bg */
+  -webkit-box-shadow: 0 0 0px 1000px #1f2937 inset !important;
+  -webkit-text-fill-color: #d1d5db !important; /* Tailwind text-gray-300 */
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* Selection color */
 ::selection {
   background: rgba(220, 38, 38, 0.3);

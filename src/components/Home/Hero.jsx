@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
   return (
     <section
       id="home"
@@ -77,7 +80,10 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <button className="bg-red-600 hover:bg-red-700 text-white px-8 py-2 text-lg group flex items-center rounded-xl cursor-pointer font-semibold">
+            <button
+              onClick={() => navigate("/register")}
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-2 text-lg group flex items-center rounded-xl cursor-pointer font-semibold"
+            >
               <span>Start Your Journey</span>
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>

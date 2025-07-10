@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Dumbbell, Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -49,7 +50,10 @@ const Header = () => {
                 </Link>
               </motion.div>
             ))}
-            <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-md rounded-xl cursor-pointer transition duration-300">
+            <button
+              onClick={() => navigate("/login")}
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-md rounded-xl cursor-pointer transition duration-300"
+            >
               Get Started
             </button>
           </div>
@@ -87,7 +91,10 @@ const Header = () => {
                   </Link>
                 </motion.div>
               ))}
-              <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 text-md rounded-xl cursor-pointer font-semibold transition duration-300">
+              <button
+                onClick={() => navigate("/login")}
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 text-md rounded-xl cursor-pointer font-semibold transition duration-300"
+              >
                 Get Started
               </button>
             </motion.div>
