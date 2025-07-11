@@ -17,6 +17,7 @@ export const Signup = () => {
   const [isMatch, setMatch] = useState(false);
   const [termsCheck, setTermsCheck] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [validationArr, setValidationArr] = useState([]);
 
   const navigate = useNavigate();
 
@@ -43,12 +44,15 @@ export const Signup = () => {
     console.log(data);
     try {
       const res = await axios.post(`${baseUrl}user/register`, {
-        data,
+        ...data,
       });
+      console.log(res.data);
       if (res.data.status == 201) {
         console.log("User registered Successfully!");
-      } else {
+        navigate("/login");
+      } else if (res.data.status == 400) {
         console.log("Error in registering user!");
+        setValidationArr(res.data.errors);
       }
     } catch (error) {
       console.log("Err:", error);
@@ -96,6 +100,7 @@ export const Signup = () => {
           inputId="fullName"
           formData={signupFormData}
           setFormData={setSignupFormData}
+          validationArr={validationArr}
         />
         <InputBox
           placeholder="Enter your email"
@@ -105,6 +110,7 @@ export const Signup = () => {
           inputId="email"
           formData={signupFormData}
           setFormData={setSignupFormData}
+          validationArr={validationArr}
         />
         <InputBox
           placeholder="Enter your password"
@@ -114,6 +120,7 @@ export const Signup = () => {
           inputId="password"
           formData={signupFormData}
           setFormData={setSignupFormData}
+          validationArr={validationArr}
         />
         <InputBox
           placeholder="Confirm your password"
@@ -123,6 +130,7 @@ export const Signup = () => {
           inputId="cpassword"
           formData={signupFormData}
           setFormData={setSignupFormData}
+          validationArr={validationArr}
         />
 
         <div className="flex items-start space-x-2 mt-1">

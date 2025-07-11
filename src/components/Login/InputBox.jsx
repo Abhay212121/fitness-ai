@@ -9,10 +9,13 @@ export const InputBox = ({
   inputType,
   formData,
   setFormData,
+  validationArr,
 }) => {
   const [type, setType] = useState(inputType);
   const [isPass] = useState(inputType == "password" ? true : false);
   const [borderColor, setBorderColor] = useState("border-gray-400");
+
+  const err = validationArr?.find((err) => err.path === inputId);
 
   const handleEyeClick = () => {
     setType((prev) => {
@@ -49,12 +52,19 @@ export const InputBox = ({
 
   return (
     <div className="flex flex-col space-y-2">
-      <label
-        htmlFor={inputId}
-        className="text-gray-200"
-      >
-        {labelName}
-      </label>
+      <div className="flex justify-between">
+        <label
+          htmlFor={inputId}
+          className="text-gray-200"
+        >
+          {labelName}
+        </label>
+        {err && (
+          <p className="text-sm italic text-red-600 font-semibold tracking-wide">
+            {err.msg}
+          </p>
+        )}
+      </div>
       <div className="flex items-center relative">
         <Iconname className="w-4 h-4 absolute left-3 text-gray-400" />
         <input
