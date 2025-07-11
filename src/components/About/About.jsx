@@ -73,32 +73,19 @@ const About = () => {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Images */}
+        {/* Background Image */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/60 z-10"></div>
-          <div className="grid grid-cols-3 h-full">
-            <div
-              className="bg-cover bg-center opacity-30"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')",
-              }}
-            ></div>
-            <div
-              className="bg-cover bg-center opacity-40"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')",
-              }}
-            ></div>
-            <div
-              className="bg-cover bg-center opacity-30"
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')",
-              }}
-            ></div>
-          </div>
+          {/* Overlay to darken the background */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/80 z-10"></div>
+
+          {/* Single image that fully covers the section responsively */}
+          <div
+            className="h-full w-full bg-cover bg-center bg-no-repeat"
+            style={{
+              backgroundImage:
+                "url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1600&q=80')",
+            }}
+          ></div>
         </div>
 
         {/* Animated background elements */}

@@ -14,7 +14,7 @@ export const Login = () => {
     password: "",
   });
 
-  const { setUserFlag } = useContext(UserContext);
+  const { setUserFlag, setUsername } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -35,7 +35,9 @@ export const Login = () => {
       console.log(res.data);
       if (res.data.status == 200) {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("username", res.data.userName);
         setUserFlag(true);
+        setUsername(res.data.userName);
         navigate("/");
       } else if (res.data.status == 401 || res.data.status == 404) {
         setValidationArr(res.data.errors);

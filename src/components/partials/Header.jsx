@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dumbbell, Menu, X } from "lucide-react";
+import { Dumbbell, Menu, User, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { userFlag, username } = useContext(UserContext);
+
+  const capitalize = (str) => {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
 
   const navItems = [
     { label: "Home", href: "/" },
@@ -51,10 +58,19 @@ const Header = () => {
               </motion.div>
             ))}
             <button
-              onClick={() => navigate("/login")}
-              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-md rounded-xl cursor-pointer transition duration-300"
+              onClick={() => navigate(userFlag ? "/profile" : "/login")}
+              className={`bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-md rounded-xl cursor-pointer ${
+                userFlag
+                  ? "flex items-center gap-2 font-semibold font-head tracking-wide"
+                  : ""
+              }  transition duration-300`}
             >
-              Get Started
+              {
+                <User
+                  className={`w-4 h-4 ${userFlag ? "inline-block" : "hidden"}`}
+                />
+              }
+              {userFlag ? `${capitalize(username)}` : "Get Started"}
             </button>
           </div>
 
@@ -91,12 +107,15 @@ const Header = () => {
                   </Link>
                 </motion.div>
               ))}
-              <button
+              <motion.button
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
                 onClick={() => navigate("/login")}
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 text-md rounded-xl cursor-pointer font-semibold transition duration-300"
+                className="bg-red-600 p-2 text-white text-sm rounded-md cursor-pointer font-semibold transition duration-300"
               >
                 Get Started
-              </button>
+              </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
