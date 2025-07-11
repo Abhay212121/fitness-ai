@@ -5,6 +5,7 @@ import { InputBox } from "./InputBox";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../../constants/constant";
+import { Button } from "antd";
 
 export const Signup = () => {
   const [signupFormData, setSignupFormData] = useState({
@@ -154,7 +155,7 @@ export const Signup = () => {
           </label>
         </div>
 
-        <button
+        {/* <button
           disabled={
             !termsCheck || !isMatch || !signupFormData.cpassword || loading
           }
@@ -166,8 +167,22 @@ export const Signup = () => {
           }`}
         >
           Create Account
-        </button>
+        </button> */}
 
+        <Button
+          disabled={
+            !termsCheck || !isMatch || !signupFormData.cpassword || loading
+          }
+          loading={loading}
+          onClick={handeCreateBtn}
+          className={`!w-full !border-0 !rounded-lg !px-3 !py-6 !text-lg !font-semibold !font-head !text-white !transition !duration-300 ${
+            termsCheck && isMatch && signupFormData.cpassword
+              ? "!bg-red-500 !hover:bg-red-600 !cursor-pointer"
+              : "!bg-red-400 !cursor-not-allowed"
+          }`}
+        >
+          Create Account
+        </Button>
         <p className="text-md text-gray-300 text-center">
           Already have an Account?{" "}
           <span

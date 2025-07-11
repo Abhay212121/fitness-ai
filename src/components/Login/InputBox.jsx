@@ -59,11 +59,7 @@ export const InputBox = ({
         >
           {labelName}
         </label>
-        {err && (
-          <p className="text-sm italic text-red-600 font-semibold tracking-wide">
-            {err.msg}
-          </p>
-        )}
+        {err && <p className="text-red-400 text-xs mt-1">{err.msg}</p>}
       </div>
       <div className="flex items-center relative">
         <Iconname className="w-4 h-4 absolute left-3 text-gray-400" />
@@ -75,7 +71,7 @@ export const InputBox = ({
           onChange={handleInputChange}
           autoComplete="off"
           className={`bg-[#1F2937] px-10 w-full p-2 text-sm rounded-lg border placeholder-gray-400 text-white focus:outline-0
-            ${borderColor}
+            ${borderColor} ${err && "border-red-500"}
             `}
         />
         {isPass && type == "password" && (

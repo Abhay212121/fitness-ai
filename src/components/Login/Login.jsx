@@ -5,6 +5,7 @@ import { InputBox } from "./InputBox";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../../constants/constant";
+import { Button } from "antd";
 
 export const Login = () => {
   const [loginFormData, setLoginFormData] = useState({
@@ -93,7 +94,7 @@ export const Login = () => {
           validationArr={validationArr}
         />
 
-        <button
+        {/* <button
           onClick={handleLoginBtn}
           disabled={!loginFormData.email || !loginFormData.password}
           className={`w-full rounded-xl p-3 text-white transition duration-300 ${
@@ -103,7 +104,20 @@ export const Login = () => {
           }`}
         >
           Log in
-        </button>
+        </button> */}
+
+        <Button
+          onClick={handleLoginBtn}
+          disabled={!loginFormData.email || !loginFormData.password}
+          loading={loading}
+          className={`!w-full !border-0 !rounded-lg !px-3 !py-6 !text-lg !font-semibold !font-head !text-white !transition !duration-300 ${
+            loginFormData.email && loginFormData.password
+              ? "!bg-red-500 !hover:bg-red-600 !cursor-pointer"
+              : "!bg-red-400 !cursor-not-allowed"
+          }`}
+        >
+          Log in
+        </Button>
 
         <p className="text-md text-gray-300 text-center">
           Don't have an Account?{" "}
