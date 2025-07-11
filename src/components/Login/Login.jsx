@@ -2,16 +2,19 @@ import { motion } from "framer-motion";
 import { Dumbbell, Lock, Mail, User } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { InputBox } from "./InputBox";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { baseUrl } from "../../../constants/constant";
 import { Button } from "antd";
+import UserContext from "../../context/UserContext";
 
 export const Login = () => {
   const [loginFormData, setLoginFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { setUserFlag } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -31,6 +34,8 @@ export const Login = () => {
       });
       console.log(res.data);
       if (res.data.status == 200) {
+        localStorage.setItem("token", res.data.token);
+        setUserFlag(true);
         navigate("/");
       } else if (res.data.status == 401 || res.data.status == 404) {
         setValidationArr(res.data.errors);
@@ -93,18 +98,6 @@ export const Login = () => {
           setFormData={setLoginFormData}
           validationArr={validationArr}
         />
-
-        {/* <button
-          onClick={handleLoginBtn}
-          disabled={!loginFormData.email || !loginFormData.password}
-          className={`w-full rounded-xl p-3 text-white transition duration-300 ${
-            loginFormData.email && loginFormData.password
-              ? "bg-red-500 hover:bg-red-600 cursor-pointer"
-              : "bg-red-400 cursor-not-allowed"
-          }`}
-        >
-          Log in
-        </button> */}
 
         <Button
           onClick={handleLoginBtn}

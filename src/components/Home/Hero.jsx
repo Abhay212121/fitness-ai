@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Zap } from "lucide-react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../../context/UserContext";
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { userFlag, setUserFlag } = useContext(UserContext);
 
   return (
     <section
@@ -81,10 +84,12 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <button
-              onClick={() => navigate("/register")}
+              onClick={() => navigate(userFlag ? "/profile" : "/register")}
               className="bg-red-600 hover:bg-red-700 text-white px-8 py-2 text-lg group flex items-center rounded-xl cursor-pointer font-semibold"
             >
-              <span>Start Your Journey</span>
+              <span>
+                {userFlag ? "Track Your Progress" : "Start Your Journey"}
+              </span>
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
           </motion.div>
@@ -98,7 +103,7 @@ const Hero = () => {
             {[
               { value: "50+", label: "Active Users" },
               { value: "1k+", label: "Workouts Completed" },
-              { value: "99%", label: "Success Rate" },
+              { value: "100%", label: "Success Rate" },
             ].map((stat, index) => (
               <div
                 key={index}
