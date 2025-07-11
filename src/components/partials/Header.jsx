@@ -114,7 +114,14 @@ const Header = () => {
                 onClick={() => navigate("/login")}
                 className="bg-red-600 p-2 text-white text-sm rounded-md cursor-pointer font-semibold transition duration-300"
               >
-                Get Started
+                {
+                  <User
+                    className={`w-6 h-6 ${
+                      userFlag ? "inline-block" : "hidden"
+                    }`}
+                  />
+                }
+                {userFlag ? `` : "Get Started"}
               </motion.button>
             </motion.div>
           )}

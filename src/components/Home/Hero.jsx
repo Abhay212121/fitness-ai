@@ -9,10 +9,7 @@ const Hero = () => {
   const { userFlag, setUserFlag } = useContext(UserContext);
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden font-head"
-    >
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden font-head">
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black"></div>
 

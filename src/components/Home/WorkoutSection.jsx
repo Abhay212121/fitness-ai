@@ -40,10 +40,7 @@ const WorkoutSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section
-      id="workouts"
-      className="py-20 bg-gradient-to-b from-black to-gray-900"
-    >
+    <section className="py-20 bg-gradient-to-b from-black to-gray-900">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -105,7 +102,7 @@ const WorkoutSection = () => {
                     className="w-full bg-red-600 hover:bg-red-700 text-white group flex px-4 py-2 items-center justify-center font-bold font-head rounded-lg cursor-pointer hover:scale-102 duration-300"
                   >
                     Start Workout
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 duration-300" />
                   </button>
                 </div>
               </section>
