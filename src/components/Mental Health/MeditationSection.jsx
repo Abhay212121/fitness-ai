@@ -1,7 +1,12 @@
 import { motion } from "framer-motion";
 import { Brain, Play, Clock, Users, Award } from "lucide-react";
+import { useEffect } from "react";
 
 const MeditationSection = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   const meditationFeatures = [
     {
       icon: Clock,

@@ -1,18 +1,48 @@
-import { Dumbbell } from "lucide-react";
+import { motion } from "framer-motion";
+import { Dumbbell, Github, Heart } from "lucide-react";
 
 export const Footer = () => {
   return (
-    <footer className="border-t border-red-900/20 py-8 px-8">
-      <div className="container mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="flex items-center space-x-2 mb-4 md:mb-0">
+    <footer className="bg-black border-t border-gray-800 font-head">
+      <div className="max-w-7xl mx-auto px-4 py-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center justify-center space-y-5 text-center"
+        >
+          {/* Brand */}
+          <div className="flex items-center gap-2">
             <Dumbbell className="h-6 w-6 text-red-500" />
-            <span className="text-lg font-bold text-white">FitTrack</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
+              FitTrack
+            </span>
           </div>
-          <div className="text-gray-400 text-sm">
-            © 2025 FitTrack. Your AI-powered fitness companion.
+
+          {/* Tagline */}
+          <p className="text-sm text-gray-400 max-w-lg">
+            Your AI-powered companion for fitness, nutrition, and mental
+            wellness.
+          </p>
+
+          {/* Copyright */}
+          <div className="flex items-center gap-1 text-sm text-gray-500">
+            <span>© 2025 FitTrack. Made by Abhay</span>
+            <Heart className="w-4 h-4 text-red-500 fill-current" />
+            <span>for your wellbeing.</span>
           </div>
-        </div>
+
+          {/* GitHub Link */}
+          <a
+            href="https://github.com/Abhay212121"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm font-medium bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+          >
+            <Github className="w-5 h-5 text-red-500" />
+            <span>Abhay's GitHub</span>
+          </a>
+        </motion.div>
       </div>
     </footer>
   );
