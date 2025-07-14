@@ -4,6 +4,7 @@ import { Signup } from "./components/Login/Signup";
 import { Login } from "./components/Login/Login";
 import About from "./components/About/About";
 import MentalComponent from "./components/Mental Health/MentalComponent";
+import PersonalizedPlanForm from "./components/Personalized Form/PersonalizedForm";
 
 function App() {
   return (
@@ -28,6 +29,10 @@ function App() {
         <Route
           path="/mental-health"
           element={<MentalComponent />}
+        />
+        <Route
+          path="/personalized-plan"
+          element={<PersonalizedPlanForm />}
         />
       </Routes>
     </BrowserRouter>

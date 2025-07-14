@@ -10,10 +10,6 @@ const Header = () => {
 
   const { userFlag, username } = useContext(UserContext);
 
-  const capitalize = (str) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
-  };
-
   const navItems = [
     { label: "Home", href: "/" },
     { label: "Workouts", href: "/workouts" },
@@ -70,7 +66,7 @@ const Header = () => {
                   className={`w-4 h-4 ${userFlag ? "inline-block" : "hidden"}`}
                 />
               }
-              {userFlag ? `${capitalize(username)}` : "Get Started"}
+              {userFlag ? `${username}` : "Get Started"}
             </button>
           </div>
 

@@ -35,9 +35,13 @@ export const Login = () => {
       console.log(res.data);
       if (res.data.status == 200) {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("username", res.data.userName);
+        let nameStr = res.data.userName;
+        localStorage.setItem(
+          "username",
+          nameStr.charAt(0).toUpperCase() + nameStr.slice(1)
+        );
         setUserFlag(true);
-        setUsername(res.data.userName);
+        setUsername(nameStr.charAt(0).toUpperCase() + nameStr.slice(1));
         navigate("/");
       } else if (res.data.status == 401 || res.data.status == 404) {
         setValidationArr(res.data.errors);
