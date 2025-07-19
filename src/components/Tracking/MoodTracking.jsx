@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, Save } from "lucide-react";
+import axios from "axios";
 
 export const MoodTracking = () => {
   const [moodForm, setMoodForm] = useState({
@@ -22,16 +23,37 @@ export const MoodTracking = () => {
     "Tired",
   ];
 
-  const handleMoodSubmit = (e) => {
+  const handleMoodSubmit = async (e) => {
     e.preventDefault();
     console.log("Mood data:", moodForm);
-    setMoodForm({
-      rating: "",
-      emotions: [],
-      energy: "",
-      stress: "",
-      notes: "",
-    });
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/track/mood",
+        {
+          moodForm,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.data.status === 200) {
+        alert(response.data.msg);
+        setMoodForm({
+          rating: "",
+          emotions: [],
+          energy: "",
+          stress: "",
+          notes: "",
+        });
+      } else {
+        alert("There was an error!");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   const toggleEmotion = (emotion) => {

@@ -1,26 +1,49 @@
+import axios from "axios";
 import { motion } from "framer-motion";
 import { Moon, Save } from "lucide-react";
 import { useState } from "react";
 
 export const SleepTracking = () => {
   const [sleepForm, setSleepForm] = useState({
-    bedtime: "",
+    bedTime: "",
     wakeTime: "",
     quality: "",
     hours: "",
     notes: "",
   });
 
-  const handleSleepSubmit = (e) => {
+  const handleSleepSubmit = async (e) => {
     e.preventDefault();
     console.log("Sleep data:", sleepForm);
-    setSleepForm({
-      bedtime: "",
-      wakeTime: "",
-      quality: "",
-      hours: "",
-      notes: "",
-    });
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/track/sleep",
+        {
+          sleepForm,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+      if (response.data.status === 200) {
+        alert(response.data.msg);
+        setSleepForm({
+          bedTime: "",
+          wakeTime: "",
+          quality: "",
+          hours: "",
+          notes: "",
+        });
+      } else {
+        alert("There was an error!");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -46,9 +69,9 @@ export const SleepTracking = () => {
             </label>
             <input
               type="time"
-              value={sleepForm.bedtime}
+              value={sleepForm.bedTime}
               onChange={(e) =>
-                setSleepForm({ ...sleepForm, bedtime: e.target.value })
+                setSleepForm({ ...sleepForm, bedTime: e.target.value })
               }
               className="w-full px-3 py-2 border border-neutral-700 rounded-lg bg-[#1a1a1a] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500"
               required
