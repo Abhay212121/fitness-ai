@@ -5,6 +5,7 @@ import { Login } from "./components/Login/Login";
 import About from "./components/About/About";
 import MentalComponent from "./components/Mental Health/MentalComponent";
 import PersonalizedPlanForm from "./components/Personalized Form/PersonalizedForm";
+import Tracking from "./components/Tracking/Tracking";
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
         <Route
           path="/personalized-plan"
           element={<PersonalizedPlanForm />}
+        />
+        <Route
+          path="/tracking"
+          element={<Tracking />}
         />
       </Routes>
     </BrowserRouter>
