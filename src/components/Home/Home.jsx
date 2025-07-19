@@ -5,10 +5,33 @@ import Hero from "./Hero";
 import WorkoutSection from "./WorkoutSection";
 import MentalHealthSection from "./MentalHealth";
 import TrackingSection from "./TrackingSection";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
+  }, []);
+
+  useEffect(() => {
+    const checkDataFilled = async () => {
+      const token = localStorage.getItem("token");
+
+      const response = await axios.get("http://localhost:3000/user/check", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response);
+      if (response.data.status === 404) {
+        setTimeout(() => {
+          navigate("/personalized-plan");
+        }, 5000);
+      }
+    };
+    checkDataFilled();
   }, []);
 
   return (

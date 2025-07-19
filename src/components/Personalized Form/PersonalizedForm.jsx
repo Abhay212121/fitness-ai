@@ -7,6 +7,10 @@ import { RadioGroup } from "./RadioGroup";
 import { TagInput } from "./TagInput";
 import { CheckboxGroup } from "./CheckboxGroup";
 import UserContext from "../../context/UserContext";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import Header from "../partials/Header";
 
 const renderStep = (
   currentStep,
@@ -133,12 +137,15 @@ const renderStep = (
             error={errors.fitnessGoal}
           />
           <InputField
-            label="Target Weight (kg) - Optional"
+            label="Target Weight (kg)"
             type="number"
             value={formData.targetWeight}
             onChange={(value) => updateFormData("targetWeight", value)}
             placeholder="Enter your target weight"
-            required={false}
+            min={20}
+            max={200}
+            error={errors.targetWeight}
+            required={true}
           />
           <SelectField
             label="Timeline"
@@ -199,13 +206,16 @@ const renderStep = (
 
 const PersonalizedPlanForm = () => {
   const { username } = useContext(UserContext);
+  const { loading, setLoading } = useState(false);
+
+  const navigate = useNavigate();
 
   const initialFormState = {
     fullName: "",
     gender: "",
     age: "",
-    heightFeet: "",
-    heightInches: "",
+    heightFeet: 5,
+    heightInches: 8,
     weight: "",
 
     // Step 2: Lifestyle & Activity
@@ -248,14 +258,11 @@ const PersonalizedPlanForm = () => {
       "heightFeet",
       "heightInches",
       "weight",
+      "targetWeight",
     ];
-    const optionalNumericFields = ["targetWeight"];
     let castedValue = value;
 
-    if (
-      requiredNumericFields.includes(field) ||
-      optionalNumericFields.includes(field)
-    ) {
+    if (requiredNumericFields.includes(field)) {
       castedValue = value !== "" ? Number(value) : "";
     }
 
@@ -338,6 +345,12 @@ const PersonalizedPlanForm = () => {
           return setAndReturn("fitnessGoal", "Fitness goal is required");
         if (!formData.timeline)
           return setAndReturn("timeline", "Timeline is required");
+        if (
+          !formData.targetWeight ||
+          formData.targetWeight < 20 ||
+          formData.targetWeight > 200
+        )
+          return setAndReturn("targetWeight", "Enter valid weight");
         break;
 
       case 5:
@@ -364,21 +377,63 @@ const PersonalizedPlanForm = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (validateStep(currentStep)) {
       console.log("Form submitted:", formData);
-      alert(
-        "Plan generation started! Your personalized diet and workout plan will be ready shortly."
-      );
-      setFormData({ ...initialFormState, fullName: username });
-      setCurrentStep(1);
+      setLoading(true);
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+          "http://localhost:3000/user/user-profile",
+          {
+            formData,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response);
+        if (response.data.status === 200) {
+          navigate("/");
+          setFormData({ ...initialFormState, fullName: username });
+          setCurrentStep(1);
+        } else {
+          alert("Failed!");
+        }
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
+
+  // Page transition animation
+  const pageVariants = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -30 },
+  };
+
   return (
-    <div className="min-h-screen bg-black py-8 px-4 font-head">
+    <div className="min-h-screen bg-black py-8 pt-32 px-4 font-head">
+      <Header />
       <div className="max-w-xl mx-auto">
-        <div className="bg-gray-900 rounded-lg shadow-xl p-8 animate-scale-in">
+         
+        <motion.div
+          variants={pageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={{ duration: 0.5 }}
+          className="bg-gray-900 rounded-lg shadow-xl p-8 animate-scale-in"
+        >
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-white mb-2">
               Create Your Personalized Plan
@@ -429,15 +484,16 @@ const PersonalizedPlanForm = () => {
               ) : (
                 <button
                   type="button"
+                  disabled={loading}
                   onClick={handleSubmit}
                   className="px-8 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg  hover:from-red-600 hover:to-red-700 transition-all duration-300 transform hover:scale-105 animate-pulse"
                 >
-                  Generate My Plan
+                  {loading ? "Generating..." : "Generate My Plan"}
                 </button>
               )}
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

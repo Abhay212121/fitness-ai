@@ -28,7 +28,6 @@ export const Footer = () => {
           {/* Copyright */}
           <div className="flex items-center gap-1 text-sm text-gray-500">
             <span>© 2025 FitTrack. Made by Abhay</span>
-            <Heart className="w-4 h-4 text-red-500 fill-current" />
             <span>for your wellbeing.</span>
           </div>
 

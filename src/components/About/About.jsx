@@ -226,7 +226,7 @@ const About = () => {
       </section>
 
       {/* Features Grid */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 md:px-20">
         <div className="container mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
