@@ -1,21 +1,32 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { Moon, Heart } from "lucide-react";
-import { SleepTracking } from "./SleepTracking";
-import { MoodTracking } from "./MoodTracking";
-import { Footer } from "../partials/Footer";
+import { BookOpen, History, Play } from "lucide-react";
 import Header from "../partials/Header";
+import { Footer } from "../partials/Footer";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { StartWorkoutTracking } from "./StartWorkoutTracking";
 
-const Tracking = () => {
-  const [activeTab, setActiveTab] = useState("sleep");
-
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, []);
+export const Workout = () => {
+  const [activeTab, setActiveTab] = useState("start");
 
   const tabs = [
-    { id: "sleep", label: "Sleep", icon: Moon, color: "#2563EB" },
-    { id: "mood", label: "Mood", icon: Heart, color: "#EC4899" },
+    {
+      id: "start",
+      label: "Start Workout",
+      icon: Play,
+      color: "#CE241A",
+    },
+    {
+      id: "templates",
+      label: "Templates",
+      icon: BookOpen,
+      color: "#2563EB",
+    },
+    {
+      id: "history",
+      label: "History",
+      icon: History,
+      color: "#EC4899",
+    },
   ];
 
   return (
@@ -32,11 +43,11 @@ const Tracking = () => {
               className="text-center"
             >
               <h1 className="text-4xl font-bold text-[#FAFAFA] mb-4">
-                Track Your Progress
+                Track Your Workouts
               </h1>
               <p className="text-xl text-[#A4A7B0] max-w-2xl mx-auto">
-                Log your sleep patterns and emotional well-being to stay on
-                track with your health goals.
+                Log your daily workouts, Workout history, and Workout templates
+                to stay on track with your health goals.
               </p>
             </motion.div>
           </div>
@@ -75,13 +86,12 @@ const Tracking = () => {
           </motion.div>
 
           {/* Tab Content */}
-          {activeTab === "sleep" && <SleepTracking />}
-          {activeTab === "mood" && <MoodTracking />}
+          {activeTab === "start" && <StartWorkoutTracking />}
+          {/* {activeTab === "sleep" && <SleepTracking />}
+          {activeTab === "mood" && <MoodTracking />} */}
         </div>
       </div>
       <Footer />
     </>
   );
 };
-
-export default Tracking;

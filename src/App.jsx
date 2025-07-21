@@ -6,6 +6,7 @@ import About from "./components/About/About";
 import MentalComponent from "./components/Mental Health/MentalComponent";
 import PersonalizedPlanForm from "./components/Personalized Form/PersonalizedForm";
 import Tracking from "./components/Tracking/Tracking";
+import { Workout } from "./components/Workout/Workout";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
         <Route
           path="/tracking"
           element={<Tracking />}
+        />
+        <Route
+          path="/workouts"
+          element={<Workout />}
         />
       </Routes>
     </BrowserRouter>
