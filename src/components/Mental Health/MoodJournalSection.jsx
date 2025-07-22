@@ -34,7 +34,10 @@ const MoodJournalSection = () => {
   ];
 
   return (
-    <section className="relative px-4 py-20 bg-gradient-to-b from-black to-gray-900 md:px-20">
+    <section
+      className="relative px-4 py-20 bg-gradient-to-b from-black to-gray-900 md:px-20"
+      id="mood"
+    >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

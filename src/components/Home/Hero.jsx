@@ -81,7 +81,7 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <button
-              onClick={() => navigate(userFlag ? "/profile" : "/register")}
+              onClick={() => navigate(userFlag ? "/workouts" : "/register")}
               className="bg-red-600 hover:bg-red-700 text-white px-8 py-2 text-lg group flex items-center rounded-xl cursor-pointer font-semibold"
             >
               <span>

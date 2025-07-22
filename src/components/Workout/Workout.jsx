@@ -2,7 +2,7 @@ import { BookOpen, History, Play } from "lucide-react";
 import Header from "../partials/Header";
 import { Footer } from "../partials/Footer";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StartWorkoutTracking } from "./StartWorkoutTracking";
 import { Template } from "./Template";
 import { WorkoutHistory } from "./WorkoutHistory";
@@ -30,6 +30,10 @@ export const Workout = () => {
       color: "#EC4899",
     },
   ];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   return (
     <>

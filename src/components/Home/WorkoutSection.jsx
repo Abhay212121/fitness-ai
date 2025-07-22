@@ -5,35 +5,122 @@ import { useNavigate } from "react-router-dom";
 const WorkoutSection = () => {
   const workoutPlans = [
     {
-      title: "Strength Training",
+      title: "Push Workout",
       description:
-        "Build muscle and increase strength with resistance exercises",
+        "Strengthen the chest, shoulders, and triceps with pressing movements.",
       duration: "45-60 min",
       difficulty: "Intermediate",
       calories: "350-450",
       icon: Dumbbell,
       gradient: "from-red-600 to-red-800",
-      to: "/workouts/strength",
+      to: "/workouts",
+      template: {
+        name: "Push Day",
+        exercises: [
+          {
+            name: "Barbell Bench Press",
+            sets: [{ reps: 8 }, { reps: 8 }, { reps: 6 }],
+          },
+          {
+            name: "Incline Dumbbell Press",
+            sets: [{ reps: 10 }, { reps: 10 }, { reps: 8 }],
+          },
+          {
+            name: "Overhead Shoulder Press",
+            sets: [{ reps: 10 }, { reps: 8 }, { reps: 6 }],
+          },
+          {
+            name: "Lateral Raises",
+            sets: [{ reps: 15 }, { reps: 15 }, { reps: 15 }],
+          },
+          {
+            name: "Tricep Pushdowns",
+            sets: [{ reps: 12 }, { reps: 12 }, { reps: 12 }],
+          },
+          {
+            name: "Overhead Dumbbell Extension",
+            sets: [{ reps: 12 }, { reps: 10 }, { reps: 10 }],
+          },
+        ],
+      },
     },
     {
-      title: "HIIT Cardio",
-      description: "High-intensity intervals to boost metabolism and burn fat",
-      duration: "20-30 min",
-      difficulty: "Advanced",
+      title: "Pull Workout",
+      description: "Strengthen the back and biceps using pulling movements",
+      duration: "45-60 min",
+      difficulty: "Intermediate",
       calories: "400-500",
       icon: Flame,
       gradient: "from-orange-600 to-red-600",
-      to: "/workouts/cardio",
+      to: "/workouts",
+      template: {
+        name: "Pull Day",
+        exercises: [
+          {
+            name: "Deadlifts",
+            sets: [{ reps: 6 }, { reps: 5 }, { reps: 4 }],
+          },
+          {
+            name: "Pull-Ups",
+            sets: [{ reps: 10 }, { reps: 8 }, { reps: 6 }],
+          },
+          {
+            name: "Barbell Rows",
+            sets: [{ reps: 10 }, { reps: 8 }, { reps: 8 }],
+          },
+          {
+            name: "Lat Pulldowns",
+            sets: [{ reps: 12 }, { reps: 10 }, { reps: 10 }],
+          },
+          {
+            name: "Face Pulls",
+            sets: [{ reps: 15 }, { reps: 15 }, { reps: 15 }],
+          },
+          {
+            name: "Barbell Curls",
+            sets: [{ reps: 12 }, { reps: 10 }, { reps: 10 }],
+          },
+        ],
+      },
     },
     {
-      title: "Flexibility & Recovery",
+      title: "Legs Workout",
       description: "Improve mobility and aid recovery with stretching routines",
-      duration: "15-25 min",
-      difficulty: "Beginner",
-      calories: "50-100",
+      duration: "70-90 min",
+      difficulty: "Advanced",
+      calories: "500-600",
       icon: Target,
       gradient: "from-red-700 to-pink-600",
-      to: "/workouts/flexibility",
+      to: "/workouts",
+      template: {
+        name: "Leg Day",
+        exercises: [
+          {
+            name: "Barbell Back Squat",
+            sets: [{ reps: 8 }, { reps: 8 }, { reps: 6 }],
+          },
+          {
+            name: "Romanian Deadlift",
+            sets: [{ reps: 10 }, { reps: 10 }, { reps: 8 }],
+          },
+          {
+            name: "Walking Lunges",
+            sets: [{ reps: 12 }, { reps: 12 }, { reps: 12 }],
+          },
+          {
+            name: "Leg Press",
+            sets: [{ reps: 10 }, { reps: 10 }, { reps: 8 }],
+          },
+          {
+            name: "Leg Extensions",
+            sets: [{ reps: 15 }, { reps: 15 }, { reps: 12 }],
+          },
+          {
+            name: "Seated Calf Raise",
+            sets: [{ reps: 15 }, { reps: 15 }, { reps: 15 }],
+          },
+        ],
+      },
     },
   ];
 
@@ -98,7 +185,13 @@ const WorkoutSection = () => {
                     </div>
                   </div>
                   <button
-                    onClick={() => navigate(`${plan.to}`)}
+                    onClick={() => {
+                      localStorage.setItem(
+                        "selectedTemplate",
+                        JSON.stringify(plan.template)
+                      );
+                      navigate(`${plan.to}`);
+                    }}
                     className="w-full bg-red-600 hover:bg-red-700 text-white group flex px-4 py-2 items-center justify-center font-bold font-head rounded-lg cursor-pointer hover:scale-102 duration-300"
                   >
                     Start Workout
@@ -120,7 +213,7 @@ const WorkoutSection = () => {
             onClick={() => navigate("/workouts")}
             className="border-red-500 border text-red-500 hover:bg-red-500 hover:text-white w-fit mx-auto bg-black group flex px-4 py-2 items-center justify-center font-bold font-head rounded-lg cursor-pointer duration-300"
           >
-            View All Workouts
+            Start A New Workout
             <ArrowRight className="ml-2 w-5 h-5" />
           </button>
         </motion.div>

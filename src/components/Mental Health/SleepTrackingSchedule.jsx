@@ -45,10 +45,13 @@ const SleepTrackingSection = () => {
   ];
 
   return (
-    <section className="relative md:px-20 font-head">
+    <section
+      id="sleep"
+      className="relative md:px-20 font-head scroll-mt-20"
+    >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="text-center mb-12"
       >
@@ -67,7 +70,7 @@ const SleepTrackingSection = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
           <div className="relative">
@@ -88,7 +91,7 @@ const SleepTrackingSection = () => {
 
         <motion.div
           initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
@@ -97,7 +100,7 @@ const SleepTrackingSection = () => {
               <motion.div
                 key={metric.label}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="bg-purple-900/20 border-purple-500/30 hover:border-purple-400/50 transition-all duration-300 rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -130,7 +133,7 @@ const SleepTrackingSection = () => {
               <motion.div
                 key={tip.title}
                 initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="flex items-start space-x-3"
               >

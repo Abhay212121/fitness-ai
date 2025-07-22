@@ -10,6 +10,7 @@ const MentalHealthSection = () => {
       icon: Brain,
       duration: "5-20 min",
       color: "text-blue-400",
+      to: "meditation",
     },
     {
       title: "Sleep Tracking",
@@ -18,6 +19,7 @@ const MentalHealthSection = () => {
       icon: Moon,
       duration: "Ongoing",
       color: "text-purple-400",
+      to: "sleep",
     },
     {
       title: "Mood Journal",
@@ -25,6 +27,7 @@ const MentalHealthSection = () => {
       icon: Smile,
       duration: "2-5 min",
       color: "text-green-400",
+      to: "mood",
     },
     {
       title: "Stress Relief",
@@ -32,6 +35,7 @@ const MentalHealthSection = () => {
       icon: Heart,
       duration: "3-10 min",
       color: "text-red-400",
+      to: "stress",
     },
   ];
 
@@ -59,7 +63,7 @@ const MentalHealthSection = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 overflow-x-hidden md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4 overflow-x-hidden md:px-12">
           {mentalHealthFeatures.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -86,7 +90,14 @@ const MentalHealthSection = () => {
                 </div>
                 <div className="space-y-4 p-6 pt-0">
                   <p className="text-gray-300 mb-4">{feature.description}</p>
-                  <button className="inline-flex items-center justify-center gap-2 text-sm font-medium text-red-400 hover:text-gray-200 hover:bg-red-900/20 px-3 py-2 rounded-md transition-colors cursor-pointer">
+                  <button
+                    onClick={() =>
+                      navigate(`/mental-health`, {
+                        state: { scrollTo: feature.to },
+                      })
+                    }
+                    className="inline-flex items-center justify-center gap-2 text-sm font-medium text-red-400 hover:text-gray-200 hover:bg-red-900/20 px-3 py-2 rounded-md transition-colors cursor-pointer"
+                  >
                     Learn More
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -96,7 +107,7 @@ const MentalHealthSection = () => {
           ))}
         </div>
 
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -117,7 +128,7 @@ const MentalHealthSection = () => {
               Start Check-in
             </button>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

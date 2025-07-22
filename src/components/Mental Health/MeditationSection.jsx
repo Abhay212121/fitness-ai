@@ -3,9 +3,9 @@ import { Brain, Play, Clock, Users, Award } from "lucide-react";
 import { useEffect } from "react";
 
 const MeditationSection = () => {
-  useEffect(() => {
-    window.scrollTo({ top: 0 });
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0 });
+  // }, []);
 
   const meditationFeatures = [
     {
@@ -47,7 +47,10 @@ const MeditationSection = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-black text-white md:px-20">
+    <section
+      id="meditation"
+      className="py-20 px-4 bg-black text-white md:px-20"
+    >
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}

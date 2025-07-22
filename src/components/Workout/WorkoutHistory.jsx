@@ -86,13 +86,16 @@ export const WorkoutHistory = () => {
                           {exercise.name}
                         </span>
                         <ul className="ml-4 list-disc text-[#a4a6ab]">
-                          {exercise.sets.map((set, index) => (
-                            <li key={index}>
-                              {set.completed ? "✅" : "❌"} Set {index + 1} —{" "}
-                              {set.reps} reps{" "}
-                              {set.weight ? `@ ${set.weight}kg` : ""}
-                            </li>
-                          ))}
+                          {exercise.sets.map(
+                            (set, index) =>
+                              set.weight != null && (
+                                <li key={index}>
+                                  {set.completed ? "✅" : "❌"} Set {index + 1}{" "}
+                                  — {set.reps} reps{" "}
+                                  {set.weight ? `@ ${set.weight}kg` : ""}
+                                </li>
+                              )
+                          )}
                         </ul>
                       </div>
                     ))}

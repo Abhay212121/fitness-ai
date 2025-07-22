@@ -6,43 +6,58 @@ import SleepTrackingSchedule from "./SleepTrackingSchedule";
 import { Footer } from "../partials/Footer";
 import Header from "../partials/Header";
 import StressReliefSection from "./StressReliefSection";
-
-const mentalHealthData = [
-  {
-    title: "Meditation",
-    description: "Find inner peace",
-    icon: Brain,
-    color: "text-blue-400",
-    bgColor: "bg-blue-900/20",
-    borderColor: "border-blue-500/30",
-  },
-  {
-    title: "Sleep Better",
-    description: "Track your rest",
-    icon: Moon,
-    color: "text-purple-400",
-    bgColor: "bg-purple-900/20",
-    borderColor: "border-purple-500/30",
-  },
-  {
-    title: "Mood Journal",
-    description: "Track emotions",
-    icon: Smile,
-    color: "text-green-400",
-    bgColor: "bg-green-900/20",
-    borderColor: "border-green-500/30",
-  },
-  {
-    title: "Stress Relief",
-    description: "Quick relaxation",
-    icon: Heart,
-    color: "text-red-400",
-    bgColor: "bg-red-900/20",
-    borderColor: "border-red-500/30",
-  },
-];
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const MentalHealth = () => {
+  const mentalHealthData = [
+    {
+      title: "Meditation",
+      description: "Find inner peace",
+      icon: Brain,
+      color: "text-blue-400",
+      bgColor: "bg-blue-900/20",
+      borderColor: "border-blue-500/30",
+    },
+    {
+      title: "Sleep Better",
+      description: "Track your rest",
+      icon: Moon,
+      color: "text-purple-400",
+      bgColor: "bg-purple-900/20",
+      borderColor: "border-purple-500/30",
+    },
+    {
+      title: "Mood Journal",
+      description: "Track emotions",
+      icon: Smile,
+      color: "text-green-400",
+      bgColor: "bg-green-900/20",
+      borderColor: "border-green-500/30",
+    },
+    {
+      title: "Stress Relief",
+      description: "Quick relaxation",
+      icon: Heart,
+      color: "text-red-400",
+      bgColor: "bg-red-900/20",
+      borderColor: "border-red-500/30",
+    },
+  ];
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const temp = document.getElementById(location.state.scrollTo);
+      if (temp) {
+        setTimeout(() => {
+          temp.scrollIntoView();
+        }, 0); //waiting for render
+      }
+    }
+  }, [location.state]);
+
   return (
     <div className="min-h-screen bg-black text-white font-head">
       <Header />
