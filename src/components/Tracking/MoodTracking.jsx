@@ -4,6 +4,7 @@ import { Heart, Save } from "lucide-react";
 import axios from "axios";
 
 export const MoodTracking = () => {
+  const [isLoading, setLoading] = useState(false);
   const [moodForm, setMoodForm] = useState({
     rating: "",
     emotions: [],
@@ -26,6 +27,7 @@ export const MoodTracking = () => {
   const handleMoodSubmit = async (e) => {
     e.preventDefault();
     console.log("Mood data:", moodForm);
+    setLoading(true);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
@@ -53,6 +55,8 @@ export const MoodTracking = () => {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -185,10 +189,11 @@ export const MoodTracking = () => {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="w-full flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-md hover:bg-red-700 transition-colors duration-200"
         >
           <Save className="w-4 h-4" />
-          Save Mood Entry
+          {isLoading ? "Saving..." : "Save Mood Entry"}
         </button>
       </form>
     </motion.div>

@@ -12,9 +12,12 @@ export const SleepTracking = () => {
     notes: "",
   });
 
+  const [isLoading, setLoading] = useState(false);
+
   const handleSleepSubmit = async (e) => {
     e.preventDefault();
     console.log("Sleep data:", sleepForm);
+    setLoading(true);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
@@ -43,6 +46,8 @@ export const SleepTracking = () => {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(true);
     }
   };
 
@@ -149,10 +154,11 @@ export const SleepTracking = () => {
 
         <button
           type="submit"
+          disabled={isLoading}
           className="w-full flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors duration-200"
         >
           <Save className="w-4 h-4" />
-          Save Sleep Data
+          {isLoading ? "Saving..." : "Save Sleep Data"}
         </button>
       </form>
     </motion.div>

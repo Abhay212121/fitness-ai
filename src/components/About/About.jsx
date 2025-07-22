@@ -159,7 +159,7 @@ const About = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16"
             >
-              <Link to={userFlag ? "/profile" : "/register"}>
+              <Link to={userFlag ? "/tracking" : "/register"}>
                 <motion.button
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-5 rounded-xl font-bold tracking-wide text-lg hover:from-red-800 hover:to-red-800 transition-all duration-300 shadow-md hover:shadow-red-500/25 group cursor-pointer"
@@ -428,7 +428,7 @@ const About = () => {
                   whileTap={{ scale: 0.95 }}
                   className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-5 rounded-xl font-bold tracking-wide text-lg hover:from-red-800 hover:to-red-800 transition-all duration-300 shadow-md hover:shadow-red-500/25 group cursor-pointer"
                 >
-                  Let's get started
+                  {userFlag ? "My Dashboard" : `Let's get started`}
                   <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform inline" />
                 </motion.button>
               </Link>
