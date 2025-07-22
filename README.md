@@ -1,12 +1,43 @@
-# React + Vite
+# 🏋️‍♂️ FitHub – AI-Powered Fitness Companion
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**FitHub** is an intelligent fitness platform that uses AI to generate personalized workout and diet plans based on user preferences, goals, and body metrics. It’s built to help users stay consistent, motivated, and on track with their fitness journey.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- ✅ **AI-Personalized Plans** – Generate tailored fitness and diet routines based on inputs like goal, body type, sleep, activity level, and dietary preference.
+- 🧠 **Multi-Step Smart Form** – An interactive form that collects personal data with animated UI and validations.
+- 📊 **Progress Tracking** – Log and view data for mood and sleep to stay aware of your physical and mental health.
+- 🎯 **Responsive Design** – Optimized for mobile and desktop with a smooth and intuitive interface.
+- ✨ **Clean UI** – Designed with Tailwind CSS and icons from Lucide, with tabbed navigation and conditional rendering.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React.js, Tailwind CSS  
+- **Backend**: NodeJS, ExpressJS, PostgreSQL, JWT  
+- **State Management**: Context API  
+- **Routing**: React Router DOM  
+- **Animation**: Framer Motion  
+- **AI Integration**: OpenAI (for plan generation)
+
+---
+
+## Backend Repo link:
+
+https://github.com/Abhay212121/fitness-ai-backend
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+## 🙋‍♂️ Author
+
+**Abhay Sharma**  
+[LinkedIn](https://www.linkedin.com/in/abhay-sharma2121/) • [GitHub](https://github.com/Abhay212121)
