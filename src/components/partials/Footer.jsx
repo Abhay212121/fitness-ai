@@ -15,7 +15,7 @@ export const Footer = () => {
           <div className="flex items-center gap-2">
             <Dumbbell className="h-6 w-6 text-red-500" />
             <span className="text-xl font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-              FitTrack
+              FitHub
             </span>
           </div>
 
@@ -27,7 +27,7 @@ export const Footer = () => {
 
           {/* Copyright */}
           <div className="flex items-center gap-1 text-sm text-gray-500">
-            <span>© 2025 FitTrack. Made by Abhay</span>
+            <span>© 2025 FitHub. Made by Abhay</span>
             <span>for your wellbeing.</span>
           </div>
 

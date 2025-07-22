@@ -76,10 +76,10 @@ export const Signup = () => {
         >
           <Dumbbell className="h-8 w-8 text-red-500" />
           <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
-            FitTrack
+            FitHub
           </span>
         </div>
-        <p className="text-white font-bold text-3xl">Join FitTrack</p>
+        <p className="text-white font-bold text-3xl">Join FitHub</p>
         <p className="text-gray-400 tracking-wide text-lg">
           Start your fitness journey today
         </p>

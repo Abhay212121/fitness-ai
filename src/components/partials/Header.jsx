@@ -35,7 +35,7 @@ const Header = () => {
             >
               <Dumbbell className="h-8 w-8 text-red-500" />
               <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
-                FitTrack
+                FitHub
               </span>
             </motion.div>
           </Link>
