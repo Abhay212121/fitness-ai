@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { Brain, Moon, Smile, Heart, ArrowRight } from "lucide-react";
+import { Brain, Moon, Smile, Heart } from "lucide-react";
 import MeditationSection from "./MeditationSection";
 import MoodJournalSection from "./MoodJournalSection";
 import SleepTrackingSchedule from "./SleepTrackingSchedule";
 import { Footer } from "../partials/Footer";
 import Header from "../partials/Header";
-import StressReliefSection from "./StressReliefSection";
+// import StressReliefSection from "./StressReliefSection";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -53,7 +53,7 @@ const MentalHealth = () => {
       if (temp) {
         setTimeout(() => {
           temp.scrollIntoView();
-        }, 0); //waiting for render
+        }, 0);
       }
     }
   }, [location.state]);
@@ -64,9 +64,7 @@ const MentalHealth = () => {
 
       <div className="pt-20 pb-16">
         <div className="container mx-auto px-4">
-          {/* New Hero Section */}
           <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-            {/* Background Image */}
             <div className="absolute inset-0 z-0">
               <img
                 src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop&crop=center"
@@ -76,19 +74,18 @@ const MentalHealth = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80"></div>
             </div>
 
-            {/* Hero Content */}
             <div className="relative z-10 text-center max-w-4xl mx-auto">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 className="mb-8"
               >
                 <div className="flex justify-center mb-6">
                   <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
                     className="w-20 h-20 bg-gradient-to-r from-red-500 to-red-600 rounded-full flex items-center justify-center"
                   >
                     <Brain className="w-10 h-10 text-white" />
@@ -107,20 +104,23 @@ const MentalHealth = () => {
                 </p>
               </motion.div>
 
-              {/* Quick Access Cards */}
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.8 }}
+                transition={{ delay: 0.4, duration: 0.6, ease: "easeOut" }}
                 className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
               >
                 {mentalHealthData.map((item, index) => (
                   <motion.div
                     key={item.title}
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1 + index * 0.1, type: "spring" }}
-                    whileHover={{ scale: 1.05, y: -5 }}
+                    transition={{
+                      delay: 0.5 + index * 0.1,
+                      duration: 0.5,
+                      ease: "easeOut",
+                    }}
+                    whileHover={{ scale: 1.02 }}
                     className={`${item.bgColor} ${item.borderColor} border rounded-2xl p-4 backdrop-blur-sm cursor-pointer group transition-all duration-300`}
                   >
                     <div className="flex flex-col items-center text-center">
@@ -140,12 +140,11 @@ const MentalHealth = () => {
             </div>
           </section>
 
-          {/* Detailed Sections */}
           <div className="space-y-32 mt-32">
             <MeditationSection />
             <SleepTrackingSchedule />
             <MoodJournalSection />
-            <StressReliefSection />
+            {/* <StressReliefSection /> */}
           </div>
         </div>
       </div>

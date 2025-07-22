@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Smile, Calendar, TrendingUp, BookOpen, Heart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const MoodJournalSection = () => {
   const moodData = [
@@ -33,9 +34,10 @@ const MoodJournalSection = () => {
     },
   ];
 
+  const navigate = useNavigate();
   return (
     <section
-      className="relative px-4 py-20 bg-gradient-to-b from-black to-gray-900 md:px-20"
+      className="relative px-4 pb-20 bg-gradient-to-b from-black to-gray-900 md:px-20"
       id="mood"
     >
       <motion.div
@@ -113,7 +115,10 @@ const MoodJournalSection = () => {
             ))}
           </div>
 
-          <button className="bg-green-600 hover:bg-green-700 text-white w-full px-5 py-2 rounded-md text-sm font-medium inline-flex items-center justify-center gap-2 transition-colors cursor-pointer duration-300">
+          <button
+            onClick={() => navigate("/tracking", { state: { tab: "mood" } })}
+            className="bg-green-600 hover:bg-green-700 text-white w-full px-5 py-2 rounded-md text-sm font-medium inline-flex items-center justify-center gap-2 transition-colors cursor-pointer duration-300"
+          >
             Start Journaling
           </button>
         </motion.div>

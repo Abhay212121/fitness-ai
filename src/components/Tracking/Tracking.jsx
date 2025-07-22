@@ -5,9 +5,11 @@ import { SleepTracking } from "./SleepTracking";
 import { MoodTracking } from "./MoodTracking";
 import { Footer } from "../partials/Footer";
 import Header from "../partials/Header";
+import { useLocation } from "react-router-dom";
 
 const Tracking = () => {
   const [activeTab, setActiveTab] = useState("sleep");
+  const location = useLocation();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
@@ -17,6 +19,14 @@ const Tracking = () => {
     { id: "sleep", label: "Sleep", icon: Moon, color: "#2563EB" },
     { id: "mood", label: "Mood", icon: Heart, color: "#EC4899" },
   ];
+
+  useEffect(() => {
+    if (location.state?.tab == "mood") {
+      setActiveTab("mood");
+    } else if (location.state?.tab == "sleep") {
+      setActiveTab("sleep");
+    }
+  }, [location.state]);
 
   return (
     <>

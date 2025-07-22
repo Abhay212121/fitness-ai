@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Moon, TrendingUp, Clock, Brain, Zap } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const SleepTrackingSection = () => {
   const sleepMetrics = [
@@ -44,6 +45,8 @@ const SleepTrackingSection = () => {
     },
   ];
 
+  const navigate = useNavigate();
+
   return (
     <section
       id="sleep"
@@ -51,7 +54,7 @@ const SleepTrackingSection = () => {
     >
       <motion.div
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         className="text-center mb-12"
       >
@@ -70,7 +73,7 @@ const SleepTrackingSection = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
           <div className="relative">
@@ -91,7 +94,7 @@ const SleepTrackingSection = () => {
 
         <motion.div
           initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
+          whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="space-y-6"
         >
@@ -133,7 +136,7 @@ const SleepTrackingSection = () => {
               <motion.div
                 key={tip.title}
                 initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.1 }}
                 className="flex items-start space-x-3"
               >
@@ -147,7 +150,10 @@ const SleepTrackingSection = () => {
               </motion.div>
             ))}
           </div>
-          <button className="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center justify-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 cursor-pointer duration-300">
+          <button
+            onClick={() => navigate("/tracking", { state: { tab: "sleep" } })}
+            className="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-md text-sm font-medium inline-flex items-center justify-center gap-2 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 cursor-pointer duration-300"
+          >
             Start Sleep Tracking
           </button>
         </motion.div>
