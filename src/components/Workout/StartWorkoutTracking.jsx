@@ -4,7 +4,6 @@ import {
   BookOpen,
   Check,
   Clock,
-  CodeSquare,
   Pause,
   Play,
   Plus,
@@ -12,13 +11,14 @@ import {
 } from "lucide-react";
 import axios from "axios";
 
-export const StartWorkoutTracking = () => {
+export const StartWorkoutTracking = ({ setActiveTab }) => {
   const [isWorkoutActive, setIsWorkoutActive] = useState(false);
   const [workoutName, setWorkoutName] = useState("");
   const [workoutTimer, setWorkoutTimer] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [currentWorkout, setCurrentWorkout] = useState([]);
   const [workoutNotes, setWorkoutNotes] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const startWorkout = () => {
     setIsWorkoutActive(true);
@@ -28,9 +28,16 @@ export const StartWorkoutTracking = () => {
     setWorkoutNotes("");
   };
 
-  const setWorkoutView = (view) => {
-    console.log("Switching to view:", view);
-  };
+  useEffect(() => {
+    const template = localStorage.getItem("selectedTemplate");
+    if (template) {
+      const parsed = JSON.parse(template);
+      setIsWorkoutActive(true);
+      setWorkoutName(parsed.name || "");
+      setCurrentWorkout(parsed.exercises || []);
+      localStorage.removeItem("selectedTemplate");
+    }
+  }, []);
 
   useEffect(() => {
     let intervalId;
@@ -106,16 +113,59 @@ export const StartWorkoutTracking = () => {
     );
   };
 
-  const saveAsTemplate = () => {
+  const saveAsTemplate = async () => {
+    if (
+      currentWorkout.length === 0 ||
+      currentWorkout.some((ex) => ex.sets.length === 0)
+    ) {
+      alert("Add at least one exercise with one set.");
+      return;
+    }
+    setLoading(true);
+    const templateName = prompt("Enter template name: ");
     console.log("Saved as template:", { workoutName, currentWorkout });
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/track/savetemplate",
+        {
+          currentWorkout,
+          workoutName,
+          templateName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response);
+      if (response.data.status === 200) {
+        alert("Template added");
+      } else {
+        alert("Try again!");
+      }
+    } catch (error) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const endWorkout = async () => {
+    if (
+      currentWorkout.length === 0 ||
+      currentWorkout.some((ex) => ex.sets.length === 0)
+    ) {
+      alert("Add at least one exercise with one set.");
+      return;
+    }
     console.log("Workout finished:", {
       workoutName,
       currentWorkout,
       workoutNotes,
     });
+    setLoading(true);
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
@@ -141,11 +191,13 @@ export const StartWorkoutTracking = () => {
       }
     } catch (error) {
       console.log(error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="space-y-6 bg-black text-white p-6 rounded-xl shadow-lg">
+    <div className="space-y-6 bg-black text-white p-6 rounded-xl shadow-lg md:px-10">
       {!isWorkoutActive ? (
         <div className="bg-[#111] rounded-lg border border-red-800 shadow-sm p-6">
           <div className="flex items-center gap-2 mb-6">
@@ -166,7 +218,7 @@ export const StartWorkoutTracking = () => {
             </button>
 
             <button
-              onClick={() => setWorkoutView("templates")}
+              onClick={() => setActiveTab("templates")}
               className="flex items-center justify-center gap-3 p-6 border-2 border-dashed border-red-600/40 rounded-lg hover:border-red-500 hover:bg-red-950 transition-all duration-200 cursor-pointer"
             >
               <BookOpen className="w-6 h-6 text-red-500" />
@@ -207,6 +259,7 @@ export const StartWorkoutTracking = () => {
 
               <button
                 onClick={saveAsTemplate}
+                disabled={isLoading}
                 className="flex items-center gap-2 px-3 py-2 bg-gray-800 text-gray-300 rounded-md hover:bg-red-900 transition-colors cursor-pointer"
               >
                 <Save className="w-4 h-4" />
@@ -215,10 +268,11 @@ export const StartWorkoutTracking = () => {
 
               <button
                 onClick={endWorkout}
+                disabled={isLoading}
                 className="flex items-center gap-2 px-3 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors cursor-pointer"
               >
                 <Check className="w-4 h-4" />
-                Finish
+                {isLoading ? "Wait..." : "Finish"}
               </button>
             </div>
           </div>
@@ -229,6 +283,7 @@ export const StartWorkoutTracking = () => {
             onChange={(e) => setWorkoutName(e.target.value)}
             placeholder="Enter workout name..."
             className="w-full px-3 py-2 border border-red-800 rounded-md bg-black text-white focus:outline-none focus:ring-2 focus:ring-red-600 mb-6"
+            required
           />
 
           <div className="space-y-4 mb-6">

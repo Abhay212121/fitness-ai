@@ -4,6 +4,8 @@ import { Footer } from "../partials/Footer";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { StartWorkoutTracking } from "./StartWorkoutTracking";
+import { Template } from "./Template";
+import { WorkoutHistory } from "./WorkoutHistory";
 
 export const Workout = () => {
   const [activeTab, setActiveTab] = useState("start");
@@ -86,9 +88,13 @@ export const Workout = () => {
           </motion.div>
 
           {/* Tab Content */}
-          {activeTab === "start" && <StartWorkoutTracking />}
-          {/* {activeTab === "sleep" && <SleepTracking />}
-          {activeTab === "mood" && <MoodTracking />} */}
+          {activeTab === "start" && (
+            <StartWorkoutTracking setActiveTab={setActiveTab} />
+          )}
+          {activeTab === "templates" && (
+            <Template setActiveTab={setActiveTab} />
+          )}
+          {activeTab === "history" && <WorkoutHistory />}
         </div>
       </div>
       <Footer />
