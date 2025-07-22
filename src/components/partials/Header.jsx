@@ -27,15 +27,17 @@ const Header = () => {
       <div className="max-w-7xl mx-auto py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            className="flex items-center space-x-2 cursor-pointer"
-          >
-            <Dumbbell className="h-8 w-8 text-red-500" />
-            <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
-              FitTrack
-            </span>
-          </motion.div>
+          <Link to="/">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="flex items-center space-x-2 cursor-pointer"
+            >
+              <Dumbbell className="h-8 w-8 text-red-500" />
+              <span className="text-2xl font-bold bg-gradient-to-r from-red-500 to-red-600 bg-clip-text text-transparent">
+                FitTrack
+              </span>
+            </motion.div>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-7">
