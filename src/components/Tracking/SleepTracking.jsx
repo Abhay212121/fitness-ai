@@ -2,6 +2,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Moon, Save } from "lucide-react";
 import { useState } from "react";
+import { baseUrl } from "../../constant";
 
 export const SleepTracking = () => {
   const [sleepForm, setSleepForm] = useState({
@@ -21,7 +22,7 @@ export const SleepTracking = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:3000/track/sleep",
+        `${baseUrl}/track/sleep`,
         {
           sleepForm,
         },

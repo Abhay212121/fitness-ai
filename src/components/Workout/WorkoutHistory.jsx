@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { History, Loader2 } from "lucide-react";
 import axios from "axios";
+import { baseUrl } from "../../constant";
 
 export const WorkoutHistory = () => {
   const [workoutHistory, setWorkoutHistory] = useState([]);
@@ -11,14 +12,11 @@ export const WorkoutHistory = () => {
     const token = localStorage.getItem("token");
     const fetchWorkoutHistory = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/track/gethistory",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${baseUrl}/track/gethistory`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log(response);
         setWorkoutHistory(response.data.data);
       } catch (error) {

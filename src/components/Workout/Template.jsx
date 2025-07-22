@@ -1,6 +1,7 @@
 import axios from "axios";
 import { BookOpen, Loader2, Play } from "lucide-react";
 import { useEffect, useState } from "react";
+import { baseUrl } from "../../constant";
 
 export const Template = ({ setActiveTab }) => {
   const [templates, setTemplates] = useState([]);
@@ -11,14 +12,11 @@ export const Template = ({ setActiveTab }) => {
     const token = localStorage.getItem("token");
     const fetchTemplates = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/track/gettemplates",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`${baseUrl}/track/gettemplates`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log(response);
         setTemplates(response.data.data);
       } catch (error) {

@@ -7,6 +7,7 @@ import MentalHealthSection from "./MentalHealth";
 import TrackingSection from "./TrackingSection";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { baseUrl } from "../../constant";
 
 export function Home() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ export function Home() {
     const checkDataFilled = async () => {
       const token = localStorage.getItem("token");
 
-      const response = await axios.get("http://localhost:3000/user/check", {
+      const response = await axios.get(`${baseUrl}/user/check`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

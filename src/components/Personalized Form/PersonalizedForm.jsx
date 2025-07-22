@@ -11,6 +11,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Header from "../partials/Header";
+import { baseUrl } from "../../constant";
 
 const renderStep = (
   currentStep,
@@ -384,7 +385,7 @@ const PersonalizedPlanForm = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await axios.post(
-          "http://localhost:3000/user/user-profile",
+          `${baseUrl}/user/user-profile`,
           {
             formData,
           },

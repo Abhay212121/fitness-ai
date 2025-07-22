@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, Save } from "lucide-react";
 import axios from "axios";
+import { baseUrl } from "../../constant";
 
 export const MoodTracking = () => {
   const [isLoading, setLoading] = useState(false);
@@ -31,7 +32,7 @@ export const MoodTracking = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:3000/track/mood",
+        `${baseUrl}/track/mood`,
         {
           moodForm,
         },

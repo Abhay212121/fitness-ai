@@ -10,6 +10,7 @@ import {
   Save,
 } from "lucide-react";
 import axios from "axios";
+import { baseUrl } from "../../constant";
 
 export const StartWorkoutTracking = ({ setActiveTab }) => {
   const [isWorkoutActive, setIsWorkoutActive] = useState(false);
@@ -127,7 +128,7 @@ export const StartWorkoutTracking = ({ setActiveTab }) => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:3000/track/savetemplate",
+        `${baseUrl}/track/savetemplate`,
         {
           currentWorkout,
           workoutName,
@@ -169,7 +170,7 @@ export const StartWorkoutTracking = ({ setActiveTab }) => {
     const token = localStorage.getItem("token");
     try {
       const response = await axios.post(
-        "http://localhost:3000/track/workout",
+        `${baseUrl}/track/workout`,
         {
           workoutName,
           currentWorkout,
