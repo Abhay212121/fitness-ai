@@ -20,8 +20,9 @@ const Header = () => {
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
+      initial={{ y: -30 }}
       animate={{ y: 0 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       className="fixed top-0 w-full z-50 bg-black/90 backdrop-blur-md border-b border-red-900/20 font-head px-4 lg:px-24"
     >
       <div className="max-w-7xl mx-auto py-4">
@@ -29,7 +30,7 @@ const Header = () => {
           {/* Logo */}
           <Link to="/">
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               className="flex items-center space-x-2 cursor-pointer"
             >
               <Dumbbell className="h-8 w-8 text-red-500" />
@@ -41,19 +42,16 @@ const Header = () => {
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-7">
-            {navItems.map((item, index) => (
-              <motion.div
+            {navItems.map((item) => (
+              <div
                 key={item.label}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="text-gray-300 hover:text-red-400 transition-colors duration-300 relative group"
+                className="text-gray-300 hover:text-red-400 transition-colors duration-200 relative group"
               >
                 <Link to={item.href}>
                   {item.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all duration-200 group-hover:w-full"></span>
                 </Link>
-              </motion.div>
+              </div>
             ))}
             <button
               onClick={() => navigate(userFlag ? "/profile" : "/login")}
@@ -63,11 +61,7 @@ const Header = () => {
                   : ""
               }  transition duration-300`}
             >
-              {
-                <User
-                  className={`w-4 h-4 ${userFlag ? "inline-block" : "hidden"}`}
-                />
-              }
+              {userFlag && <User className="w-4 h-4" />}
               {userFlag ? `${username}` : "Get Started"}
             </button>
           </div>
@@ -89,38 +83,27 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
               className="md:hidden mt-4 px-8 space-y-4"
             >
-              {navItems.map((item, index) => (
-                <motion.div
+              {navItems.map((item) => (
+                <div
                   key={item.label}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="text-gray-300 hover:text-red-400 transition-colors duration-300 relative group w-fit"
+                  className="text-gray-300 hover:text-red-400 transition-colors duration-200 relative group w-fit"
                 >
                   <Link to={item.href}>
                     {item.label}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all duration-300 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-500 transition-all duration-200 group-hover:w-full"></span>
                   </Link>
-                </motion.div>
+                </div>
               ))}
-              <motion.button
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+              <button
                 onClick={() => navigate("/login")}
                 className="bg-red-600 p-2 text-white text-sm rounded-md cursor-pointer font-semibold transition duration-300"
               >
-                {
-                  <User
-                    className={`w-6 h-6 ${
-                      userFlag ? "inline-block" : "hidden"
-                    }`}
-                  />
-                }
+                {userFlag && <User className="w-6 h-6" />}
                 {userFlag ? `` : "Get Started"}
-              </motion.button>
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
