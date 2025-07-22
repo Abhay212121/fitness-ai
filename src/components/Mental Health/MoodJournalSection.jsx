@@ -37,7 +37,7 @@ const MoodJournalSection = () => {
   const navigate = useNavigate();
   return (
     <section
-      className="relative px-4 pb-20 bg-gradient-to-b from-black to-gray-900 md:px-20"
+      className="relative px-4 pb-20 pt-2 scroll-mt-20 bg-gradient-to-b from-black to-gray-900 md:px-20"
       id="mood"
     >
       <motion.div

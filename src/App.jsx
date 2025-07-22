@@ -7,6 +7,7 @@ import MentalComponent from "./components/Mental Health/MentalComponent";
 import PersonalizedPlanForm from "./components/Personalized Form/PersonalizedForm";
 import Tracking from "./components/Tracking/Tracking";
 import { Workout } from "./components/Workout/Workout";
+import { DashBoard } from "./components/Dashboard/Dashboard";
 
 function App() {
   return (
@@ -43,6 +44,10 @@ function App() {
         <Route
           path="/workouts"
           element={<Workout />}
+        />
+        <Route
+          path="/profile"
+          element={<DashBoard />}
         />
       </Routes>
     </BrowserRouter>

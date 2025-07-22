@@ -9,7 +9,8 @@ const StressReliefSection = () => {
       description: "Calm your nervous system with 4-4-4-4 breathing pattern",
       icon: Wind,
       image:
-        "https://images.unsplash.com/photo-1545389336-cf090694435e?w=300&h=200&fit=crop&crop=center",
+        "https://images.unsplash.com/photo-1591343395902-1adcb454c4e2?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      videoUrl: "https://www.youtube.com/watch?v=aPYmZOhJF5Q",
     },
     {
       name: "Progressive Relaxation",
@@ -19,6 +20,7 @@ const StressReliefSection = () => {
       icon: Waves,
       image:
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop&crop=center",
+      videoUrl: "https://www.youtube.com/watch?v=ClqPtWzozXs",
     },
     {
       name: "Quick Reset",
@@ -26,7 +28,8 @@ const StressReliefSection = () => {
       description: "Instant stress relief with rapid grounding techniques",
       icon: Zap,
       image:
-        "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop&crop=center",
+        "https://images.unsplash.com/photo-1545389336-cf090694435e?w=300&h=200&fit=crop&crop=center",
+      videoUrl: "https://www.youtube.com/watch?v=c1Ndym-IsQg",
     },
   ];
 
@@ -39,13 +42,13 @@ const StressReliefSection = () => {
   return (
     <section
       id="stress"
-      className="relative px-4 py-20 bg-gradient-to-b from-black via-gray-900 to-black md:px-20 font-head"
+      className="relative px-4 py-2 scroll-mt-20 bg-gradient-to-b from-black via-gray-900 to-black md:px-20 font-head"
     >
       {/* Title & Description */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.4 }}
         className="text-center mb-16"
       >
         <div className="flex justify-center items-center gap-3 mb-4">
@@ -62,11 +65,11 @@ const StressReliefSection = () => {
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        {/* Left - Stats and Emergency Card */}
+        {/* Left Column */}
         <motion.div
-          initial={{ opacity: 0, x: -30 }}
+          initial={{ opacity: 0, x: -10 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.4 }}
           className="space-y-8"
         >
           {/* Stats Grid */}
@@ -74,9 +77,9 @@ const StressReliefSection = () => {
             {stressStats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ delay: index * 0.05 }}
               >
                 <div className="bg-red-900/20 border border-red-500/30 rounded-lg text-center p-4 shadow-md">
                   <stat.icon className="w-6 h-6 text-red-400 mx-auto mb-2" />
@@ -87,7 +90,7 @@ const StressReliefSection = () => {
             ))}
           </div>
 
-          {/* Emergency Stress Relief Card */}
+          {/* Emergency Card */}
           <div className="bg-gradient-to-br from-red-900/30 to-pink-900/20 border border-red-500/20 rounded-xl p-6 shadow-lg">
             <h3 className="text-xl font-semibold text-white mb-4">
               Emergency Stress Relief
@@ -117,27 +120,26 @@ const StressReliefSection = () => {
           </div>
         </motion.div>
 
-        {/* Right - Techniques */}
+        {/* Right Column - Techniques */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
+          initial={{ opacity: 0, x: 10 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-6"
+          transition={{ duration: 0.4 }}
+          className="space-y-6 pt-2"
         >
           {techniques.map((technique, index) => (
             <motion.div
               key={technique.name}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02 }}
+              transition={{ delay: index * 0.05 }}
             >
               <div className="bg-gray-900/50 border border-gray-800 hover:border-red-500/50 transition-all duration-300 rounded-lg overflow-hidden shadow-sm">
-                <div className="flex">
+                <div className="flex items-center">
                   <img
                     src={technique.image}
                     alt={technique.name}
-                    className="w-32 h-24 object-cover"
+                    className="w-32 ml-2 h-24 object-cover"
                   />
                   <div className="p-4 flex-1">
                     <div className="flex items-center justify-between mb-2">
@@ -153,27 +155,21 @@ const StressReliefSection = () => {
                     </p>
                     <div className="flex items-center justify-between">
                       <technique.icon className="w-5 h-5 text-red-400" />
-                      <button className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-medium">
+                      <a
+                        href={technique.videoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-xs font-medium cursor-pointer"
+                      >
                         <Play className="w-3 h-3" />
                         Start
-                      </button>
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </motion.div>
           ))}
-
-          {/* Call to Action Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
-            <button className="w-full bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-semibold py-3 rounded-md shadow-md transition-all duration-300 cursor-pointer">
-              Access All Stress Relief Tools
-            </button>
-          </motion.div>
         </motion.div>
       </div>
     </section>

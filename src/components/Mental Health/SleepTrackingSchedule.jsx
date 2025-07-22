@@ -50,7 +50,7 @@ const SleepTrackingSection = () => {
   return (
     <section
       id="sleep"
-      className="relative md:px-20 font-head scroll-mt-20"
+      className="relative md:px-20 py-2 font-head scroll-mt-20"
     >
       <motion.div
         initial={{ opacity: 0, y: 30 }}

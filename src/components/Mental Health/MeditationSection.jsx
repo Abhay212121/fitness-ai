@@ -204,7 +204,7 @@ const MeditationSection = () => {
   return (
     <section
       id="meditation"
-      className="py-2 px-4 bg-black text-white md:px-20"
+      className="py-2 px-4 bg-black text-white md:px-20 scroll-mt-20"
     >
       {/* Header */}
       <motion.div

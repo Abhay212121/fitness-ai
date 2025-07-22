@@ -5,7 +5,7 @@ import MoodJournalSection from "./MoodJournalSection";
 import SleepTrackingSchedule from "./SleepTrackingSchedule";
 import { Footer } from "../partials/Footer";
 import Header from "../partials/Header";
-// import StressReliefSection from "./StressReliefSection";
+import StressReliefSection from "./StressReliefSection";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -44,6 +44,10 @@ const MentalHealth = () => {
       borderColor: "border-red-500/30",
     },
   ];
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
 
   const location = useLocation();
 
@@ -144,7 +148,7 @@ const MentalHealth = () => {
             <MeditationSection />
             <SleepTrackingSchedule />
             <MoodJournalSection />
-            {/* <StressReliefSection /> */}
+            <StressReliefSection />
           </div>
         </div>
       </div>
