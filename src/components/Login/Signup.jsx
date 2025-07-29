@@ -44,7 +44,7 @@ export const Signup = () => {
     const data = rest;
     console.log(data);
     try {
-      const res = await axios.post(`${baseUrl}user/register`, {
+      const res = await axios.post(`${baseUrl}/user/register`, {
         ...data,
       });
       console.log(res.data);
