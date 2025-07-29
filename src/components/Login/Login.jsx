@@ -29,7 +29,7 @@ export const Login = () => {
     setLoading(true);
     console.log(loginFormData);
     try {
-      const res = await axios.post(`${baseUrl}user/login`, {
+      const res = await axios.post(`${baseUrl}/user/login`, {
         ...loginFormData,
       });
       console.log(res.data);
