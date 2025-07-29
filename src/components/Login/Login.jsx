@@ -4,9 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { InputBox } from "./InputBox";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../../../constants/constant";
 import { Button } from "antd";
 import UserContext from "../../context/UserContext";
+import { baseUrl } from "../../../constants/constant";
 
 export const Login = () => {
   const [loginFormData, setLoginFormData] = useState({
@@ -29,7 +29,7 @@ export const Login = () => {
     setLoading(true);
     console.log(loginFormData);
     try {
-      const res = await axios.post(`${baseUrl}user/login`, {
+      const res = await axios.post(`${baseUrl}/user/login`, {
         ...loginFormData,
       });
       console.log(res.data);

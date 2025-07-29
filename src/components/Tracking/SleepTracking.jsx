@@ -2,7 +2,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import { Moon, Save } from "lucide-react";
 import { useState } from "react";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constants/constant";
 
 export const SleepTracking = () => {
   const [sleepForm, setSleepForm] = useState({

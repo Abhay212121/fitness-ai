@@ -10,7 +10,7 @@ import {
   Save,
 } from "lucide-react";
 import axios from "axios";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constants/constant";
 
 export const StartWorkoutTracking = ({ setActiveTab }) => {
   const [isWorkoutActive, setIsWorkoutActive] = useState(false);

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { History, Loader2 } from "lucide-react";
 import axios from "axios";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constants/constant";
 
 export const WorkoutHistory = () => {
   const [workoutHistory, setWorkoutHistory] = useState([]);

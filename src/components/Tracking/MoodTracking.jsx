@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Heart, Save } from "lucide-react";
 import axios from "axios";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constants/constant";
 
 export const MoodTracking = () => {
   const [isLoading, setLoading] = useState(false);

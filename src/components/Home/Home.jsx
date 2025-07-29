@@ -7,7 +7,7 @@ import MentalHealthSection from "./MentalHealth";
 import TrackingSection from "./TrackingSection";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constants/constant";
 
 export function Home() {
   const navigate = useNavigate();

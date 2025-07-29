@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BookOpen, Loader2, Play } from "lucide-react";
 import { useEffect, useState } from "react";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constants/constant";
 
 export const Template = ({ setActiveTab }) => {
   const [templates, setTemplates] = useState([]);

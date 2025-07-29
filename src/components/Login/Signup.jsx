@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { InputBox } from "./InputBox";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { baseUrl } from "../../../constants/constant";
 import { Button } from "antd";
+import { baseUrl } from "../../../constants/constant";
 
 export const Signup = () => {
   const [signupFormData, setSignupFormData] = useState({
@@ -38,13 +38,13 @@ export const Signup = () => {
     }
   }, [signupFormData.password, signupFormData.cpassword]);
 
-  const handeCreateBtn = async () => {
+  const handleCreateBtn = async () => {
     setLoading(true);
     const { cpassword, ...rest } = signupFormData;
     const data = rest;
     console.log(data);
     try {
-      const res = await axios.post(`${baseUrl}user/register`, {
+      const res = await axios.post(`${baseUrl}/user/register`, {
         ...data,
       });
       console.log(res.data);
@@ -174,7 +174,7 @@ export const Signup = () => {
             !termsCheck || !isMatch || !signupFormData.cpassword || loading
           }
           loading={loading}
-          onClick={handeCreateBtn}
+          onClick={handleCreateBtn}
           className={`!w-full !border-0 !rounded-lg !px-3 !py-6 !text-lg !font-semibold !font-head !text-white !transition !duration-300 ${
             termsCheck && isMatch && signupFormData.cpassword
               ? "!bg-red-500 !hover:bg-red-600 !cursor-pointer"
