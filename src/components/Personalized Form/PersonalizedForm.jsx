@@ -207,7 +207,7 @@ const renderStep = (
 
 const PersonalizedPlanForm = () => {
   const { username } = useContext(UserContext);
-  const { loading, setLoading } = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 

@@ -8,8 +8,13 @@ import SleepSummary from "./SleepSummary";
 import BodyPartAnalysis from "./BodyPartAnalysis";
 import GoalsSection from "./GoalsSection";
 import PredictionsSection from "./PredictionSection";
+import { useEffect } from "react";
 
 export const DashBoard = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, []);
+
   return (
     <>
       <Header />
