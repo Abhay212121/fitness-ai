@@ -1,7 +1,23 @@
+import axios from "axios";
 import { motion } from "framer-motion";
 import { Moon, Clock, Calendar, TrendingUp } from "lucide-react";
+import { useEffect } from "react";
+import { baseUrl } from "../../../constants/constant";
 
 const SleepSummary = () => {
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   const getSleepInsights = async () => {
+  //     const response = await axios.get(`${baseUrl}/dashboard/sleepdata`, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     console.log(response);
+  //   };
+  //   getSleepInsights();
+  // });
+
   const sleepData = [
     {
       date: "Last Night",

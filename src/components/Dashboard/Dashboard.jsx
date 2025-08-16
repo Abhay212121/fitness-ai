@@ -9,10 +9,29 @@ import BodyPartAnalysis from "./BodyPartAnalysis";
 import GoalsSection from "./GoalsSection";
 import PredictionsSection from "./PredictionSection";
 import { useEffect } from "react";
+import axios from "axios";
+import { baseUrl } from "../../../constants/constant";
+import { useNavigate } from "react-router-dom";
 
 export const DashBoard = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const getStats = async () => {
+      const response = axios.get(`${baseUrl}/dashboard/stats`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.data.status === 401) {
+        navigate("/login");
+      }
+      console.log(response);
+    };
+    getStats();
   }, []);
 
   return (
@@ -81,8 +100,8 @@ export const DashBoard = () => {
 
             <div className="p-6 text-center rounded-lg border shadow-sm bg-blue-900/20 border-blue-500/30 hover:border-blue-400/50 transition-all duration-300">
               <TrendingUp className="w-8 h-8 text-blue-400 mx-auto mb-2" />
-              <p className="text-2xl font-bold text-white">85%</p>
-              <p className="text-sm text-gray-400">Goal Achievement</p>
+              <p className="text-2xl font-bold text-white">8500kg</p>
+              <p className="text-sm text-gray-400">Total Weight Lifted</p>
             </div>
           </motion.div>
           {/* Main Dashboard Grid */}
